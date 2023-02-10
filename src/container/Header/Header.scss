@@ -118,6 +118,10 @@
     }
   }
 
+  div:hover {
+    scale: 1.1;
+    transition: 0.5s ease-in-out;
+  }
   // circles with different height & width
 
   div:nth-child(1) {

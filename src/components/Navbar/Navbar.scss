@@ -32,6 +32,25 @@
   }
 }
 
+.blogs{
+  background-color: var(--secondary-color);
+  border-radius: 25px;
+  padding: 2px 8px;
+  a{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--white-color);
+  }
+  &:hover{
+    background-color: #313bacef;
+  }
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
+}
+
+
 .app__navbar-links {
   flex: 1;
   display: flex;

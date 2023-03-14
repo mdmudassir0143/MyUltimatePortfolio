@@ -21,7 +21,7 @@ const Navbar = () => {
           </li>
         ))}
       </ul>
-
+      <div className="blogs"><a href="https://mdtechblogs.info/" target="_blank" rel="noreferrer">Blogs</a></div>
       <div className="app__navbar-menu">
         <HiMenuAlt4 onClick={() => setToggle(true)} />
 

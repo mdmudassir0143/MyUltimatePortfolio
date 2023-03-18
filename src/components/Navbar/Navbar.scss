@@ -34,12 +34,12 @@
 
 .blogs{
   background-color: var(--secondary-color);
-  border-radius: 25px;
-  padding: 2px 8px;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
   a{
     text-decoration: none;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--white-color);
   }
   &:hover{

@@ -36,21 +36,6 @@
   }
 }
 
-.copyright {
-  width: 100%;
-  padding: 2rem 0 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-
-  p {
-    text-transform: uppercase;
-    color: var(--black-color);
-  }
-}
-
 .head-text {
   font-size: 2.75rem;
   font-weight: 800;
@@ -98,12 +83,18 @@
 }
 
 .app__social {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  
-  padding: 1rem;
+
+  padding: 1rem 0.75rem;
 
   div {
     width: 40px;
@@ -178,13 +169,22 @@
   }
 }
 
-@media screen and (max-width: 500px) {
-  .app__navigation,
+// reserve a left gutter for the fixed social bar on desktop
+@media screen and (min-width: 901px) {
+  .app__wrapper {
+    padding-left: 4.5rem;
+  }
+}
+
+// fixed social bar is desktop-only
+@media screen and (max-width: 900px) {
   .app__social {
     display: none;
   }
+}
 
-  .copyright {
-    padding: 2rem;
+@media screen and (max-width: 500px) {
+  .app__navigation {
+    display: none;
   }
 }

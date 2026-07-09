@@ -6,11 +6,13 @@ import { client } from '../../client';
 import './Footer.scss';
 
 const Footer = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ username: '', email: '', message: '' });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const { username, email, message } = formData;
+  const isValid = username.trim() && email.trim() && message.trim();
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -18,13 +20,16 @@ const Footer = () => {
   };
 
   const handleSubmit = () => {
+    if (!isValid || loading) return;
+
     setLoading(true);
+    setError(false);
 
     const contact = {
       _type: 'contact',
-      name: formData.username,
-      email: formData.email,
-      message: formData.message,
+      name: username,
+      email,
+      message,
     };
 
     client.create(contact)
@@ -32,23 +37,32 @@ const Footer = () => {
         setLoading(false);
         setIsFormSubmitted(true);
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
   };
 
   return (
     <>
-      <h2 className="head-text">Take a coffee & chat with me</h2>
+      <span className="app__footer-tag">👋 Get in touch</span>
+      <h2 className="head-text">Let&apos;s build something <span>together</span></h2>
+      <p className="p-text app__footer-subtitle">
+        A collaboration, a speaking invite, or you just want to talk DevRel, AI,
+        or building on-chain — my inbox is always open.
+      </p>
 
       <div className="app__footer-cards">
-        <div className="app__footer-card ">
+        <a className="app__footer-card" href="mailto:mdmudassir0143@gmail.com">
           <img src={images.email} alt="email" />
-          <a href="mailto:mdmudassir0143@gmail.com" className="p-text">mdmudassir0143@gmail.com</a>
-        </div>
-        <div className="app__footer-card">
+          <span className="p-text">mdmudassir0143@gmail.com</span>
+        </a>
+        <a className="app__footer-card" href="tel:+917073041787">
           <img src={images.mobile} alt="phone" />
-          <a href="tel:+91 7073041787" className="p-text">+91 7073041787</a>
-        </div>
+          <span className="p-text">+91 70730 41787</span>
+        </a>
       </div>
+
       {!isFormSubmitted ? (
         <div className="app__footer-form app__flex">
           <div className="app__flex">
@@ -66,13 +80,21 @@ const Footer = () => {
               onChange={handleChangeInput}
             />
           </div>
-          <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Send Message' : 'Sending...'}</button>
+          <button type="button" className="p-text" onClick={handleSubmit} disabled={!isValid || loading}>
+            {loading ? 'Sending...' : 'Send Message'}
+          </button>
+
+          {error && (
+            <p className="p-text app__footer-error">
+              Couldn&apos;t send right now — email me directly at{' '}
+              <a href="mailto:mdmudassir0143@gmail.com">mdmudassir0143@gmail.com</a>.
+            </p>
+          )}
         </div>
       ) : (
-        <div>
-          <h3 className="head-text">
-            Thank you for getting in touch!
-          </h3>
+        <div className="app__footer-success">
+          <h3 className="head-text">Thank you for reaching out! 🙌</h3>
+          <p className="p-text">I&apos;ll get back to you as soon as I can.</p>
         </div>
       )}
     </>

@@ -1,0 +1,128 @@
+.app__sitefooter {
+  width: 100%;
+  background-color: var(--white-color);
+  color: var(--black-color);
+  border-top: 1px solid var(--lightGray-color);
+  padding: 1.5rem 2rem;
+}
+
+.app__sitefooter-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.app__sitefooter-brand {
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--white-color);
+  }
+
+  p {
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+  }
+}
+
+.app__sitefooter-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+
+  a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--white-color);
+    }
+  }
+}
+
+.app__sitefooter-social {
+  display: flex;
+  gap: 0.75rem;
+
+  a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white-color);
+
+    transition: all 0.3s ease;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      background: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.app__sitefooter-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  p {
+    color: var(--black-color);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .app__sitefooter-top {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--black-color);
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .app__sitefooter-inner,
+  .app__sitefooter-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .app__sitefooter-links {
+    justify-content: center;
+  }
+}

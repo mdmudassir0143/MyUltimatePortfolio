@@ -61,6 +61,7 @@
   li {
     margin: 0 1rem;
     cursor: pointer;
+    position: relative;
 
     flex-direction: column;
 
@@ -100,6 +101,73 @@
   }
 }
 
+/* ---- Grouped dropdown nav ---- */
+.app__navbar-trigger {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 3px;
+
+  svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+.app__navbar-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 160px;
+
+  background: var(--white-color);
+  border: 1px solid var(--lightGray-color);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 3;
+
+  li {
+    margin: 0 !important;
+    width: 100%;
+
+    // the little dot indicator does not belong in the submenu
+    > div {
+      display: none;
+    }
+
+    a {
+      display: block !important;
+      width: 100%;
+      padding: 0.55rem 1.25rem !important;
+      text-align: left;
+      text-transform: capitalize;
+      white-space: nowrap;
+    }
+
+    &:hover a {
+      color: var(--secondary-color);
+    }
+  }
+}
+
+.app__navbar-links li:hover .app__navbar-submenu,
+.app__navbar-links li:focus-within .app__navbar-submenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
 .app__navbar-menu {
   width: 35px;
   height: 35px;
@@ -129,12 +197,12 @@
 
     width: 80%;
     height: 100vh;
-    
+
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
     flex-direction: column;
-    
+
     background: url('../../assets/bgWhite.png');
     background-color: var(--white-color);
     background-size: cover;

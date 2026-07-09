@@ -36,14 +36,18 @@ export default {
       {
         name: 'tags',
         title: 'Tags',
-       type:'array',
-       of: [
-         {
-           name:'tag',
-           title:'Tag',
-           type:'string'
-         }
-       ]
+        description: 'Pick one or more categories — these drive the filter buttons on the site.',
+        type: 'array',
+        of: [{ type: 'string' }],
+        options: {
+          list: [
+            { title: 'Blockchain', value: 'Blockchain' },
+            { title: 'Developer Tools', value: 'Developer Tools' },
+            { title: 'AI', value: 'AI' },
+            { title: 'Community', value: 'Community' },
+            { title: 'Content', value: 'Content' },
+          ],
+        },
       },
      
     ],

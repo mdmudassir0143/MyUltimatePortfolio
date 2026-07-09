@@ -2,32 +2,31 @@
   "name": "backendsanityportfolio",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "Sanity Studio (v3) for the portfolio",
   "main": "package.json",
-  "author": "Mandeep Singhmar <msingh8328@gmail.com>",
+  "author": "Mudassir",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "sanity start",
-    "build": "sanity build"
+    "dev": "sanity dev",
+    "start": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^2.25.4",
-    "@sanity/core": "^2.25.0",
-    "@sanity/default-layout": "^2.25.4",
-    "@sanity/default-login": "^2.24.1",
-    "@sanity/desk-tool": "^2.25.4",
-    "@sanity/eslint-config-studio": "^2.0.0",
-    "@sanity/vision": "^2.25.4",
-    "eslint": "^8.6.0",
-    "prop-types": "^15.7",
-    "react": "^17.0",
-    "react-dom": "^17.0",
-    "styled-components": "^5.2.0"
+    "@sanity/vision": "^3",
+    "react": "^18",
+    "react-dom": "^18",
+    "sanity": "^3",
+    "styled-components": "^6.1.15"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^3",
+    "eslint": "^8"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:adrianhajdin/project_professional_portfolio.git"

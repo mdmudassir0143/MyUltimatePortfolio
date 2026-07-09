@@ -1,14 +1,20 @@
 import About from './About/About';
+import Community from './Community/Community';
+import Experience from './Experience/Experience';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
+import Research from './Research/Research';
 import Skills from './Skills/Skills';
 import Testimonial from './Testimonial/Testimonial';
 import Work from './Work/Work';
 
 export {
   About,
+  Community,
+  Experience,
   Footer,
   Header,
+  Research,
   Skills,
   Testimonial,
   Work,

@@ -2,19 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 import { AppWrap } from '../../wrapper';
-import { images } from '../../constants';
 import './Header.scss';
 
-const scaleVariants = {
-  whileInView: {
-    scale: [0, 1],
-    opacity: [0, 1],
-    transition: {
-      duration: 1,
-      ease: 'easeInOut',
-    },
-  },
-};
+const focusAreas = ['Developer Experience', 'AI', 'Blockchain Infra', 'Startups'];
 
 const Header = () => (
   <div className="app__header app__flex">
@@ -23,47 +13,32 @@ const Header = () => (
       transition={{ duration: 0.5 }}
       className="app__header-info"
     >
-      <div className="app__header-badge">
-        <div className="badge-cmp app__flex">
-          <span>👋</span>
-          <div style={{ marginLeft: 20 }}>
-            <p className="p-text">Hello, I am Mohammad</p>
-            <h1 className="head-text">Mudassir</h1>
-          </div>
-        </div>
-
-        <div className="tag-cmp app__flex">
-          <p className="p-text">Web Developer And</p>
-          <p className="p-text">Blockchain Enthusiast</p>
-        </div>
+      <div className="app__header-greeting">
+        <span className="app__header-wave" role="img" aria-label="waving hand">👋</span>
+        <p className="p-text">Hi, I&apos;m</p>
       </div>
-    </motion.div>
 
-    <motion.div
-      whileInView={{ opacity: [0, 1] }}
-      transition={{ duration: 0.5, delayChildren: 0.5 }}
-      className="app__header-img"
-    >
-      <img src={images.profile} alt="profile_bg" />
-      <motion.img
-        whileInView={{ scale: [0, 1] }}
-        transition={{ duration: 1, ease: 'easeInOut' }}
-        src={images.circle}
-        alt="profile_circle"
-        className="overlay_circle"
-      />
-    </motion.div>
+      <h1 className="app__header-name">Mohammad Mudassir</h1>
 
-    <motion.div
-      variants={scaleVariants}
-      whileInView={scaleVariants.whileInView}
-      className="app__header-circles"
-    >
-      {[images.react, images.node, images.css].map((circle, index) => (
-        <div className="circle-cmp app__flex" key={`circle-${index}`}>
-          <img src={circle} alt="profile_bg" />
-        </div>
-      ))}
+      <h2 className="app__header-role">
+        Engagement Support Engineer <span>@ Algorand Foundation</span>
+      </h2>
+
+      <p className="app__header-tagline p-text">
+        Working at the intersection of Developer Experience, AI, Blockchain
+        Infrastructure &amp; Startup Ecosystems.
+      </p>
+
+      <div className="app__header-pills">
+        {focusAreas.map((area) => (
+          <div className="app__header-pill" key={area}>{area}</div>
+        ))}
+      </div>
+
+      <div className="app__header-cta">
+        <a href="#work" className="app__header-btn app__header-btn--primary">View Work</a>
+        <a href="#contact" className="app__header-btn app__header-btn--ghost">Let&apos;s talk</a>
+      </div>
     </motion.div>
   </div>
 );

@@ -6,14 +6,19 @@ import { AppWrap, MotionWrap } from '../../wrapper';
 import { urlFor, client } from '../../client';
 import './Testimonial.scss';
 
+// How many cards fit on screen at once — matches the grid breakpoints in the scss.
+const getVisibleCount = () => {
+  if (typeof window === 'undefined') return 3;
+  if (window.innerWidth <= 600) return 1;
+  if (window.innerWidth <= 900) return 2;
+  return 3;
+};
+
 const Testimonial = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [testimonials, setTestimonials] = useState([]);
   const [brands, setBrands] = useState([]);
-
-  const handleClick = (index) => {
-    setCurrentIndex(index);
-  };
+  const [startIndex, setStartIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(getVisibleCount());
 
   useEffect(() => {
     const query = '*[_type == "testimonials"]';
@@ -28,31 +33,66 @@ const Testimonial = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => setVisibleCount(getVisibleCount());
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const maxStart = Math.max(0, testimonials.length - visibleCount);
+  const safeStart = Math.min(startIndex, maxStart);
+  const showArrows = testimonials.length > visibleCount;
+
+  const handlePrev = () => {
+    setStartIndex((prev) => {
+      const s = Math.min(prev, maxStart);
+      return s <= 0 ? maxStart : s - 1;
+    });
+  };
+
+  const handleNext = () => {
+    setStartIndex((prev) => {
+      const s = Math.min(prev, maxStart);
+      return s >= maxStart ? 0 : s + 1;
+    });
+  };
+
+  const visible = testimonials.slice(safeStart, safeStart + visibleCount);
+
   return (
     <>
-      {testimonials.length && (
-        <>
-          <div className="app__testimonial-item app__flex">
-            <img src={urlFor(testimonials[currentIndex].imgurl)} alt={testimonials[currentIndex].name} />
-            <div className="app__testimonial-content">
-              <p className="p-text">{testimonials[currentIndex].feedback}</p>
+      <div className="app__testimonial-grid">
+        {visible.map((testimonial, index) => (
+          <motion.div
+            key={testimonial._id || `${testimonial.name}-${index}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.05 }}
+            className="app__testimonial-card"
+          >
+            <p className="p-text app__testimonial-feedback">{testimonial.feedback}</p>
+
+            <div className="app__testimonial-person">
+              <img src={urlFor(testimonial.imgurl)} alt={testimonial.name} />
               <div>
-                <h4 className="bold-text">{testimonials[currentIndex].name}</h4>
-                <h5 className="p-text">{testimonials[currentIndex].company}</h5>
+                <h4 className="bold-text">{testimonial.name}</h4>
+                <h5 className="p-text">{testimonial.company}</h5>
               </div>
             </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {showArrows && (
+        <div className="app__testimonial-btns app__flex">
+          <div className="app__flex" onClick={handlePrev}>
+            <HiChevronLeft />
           </div>
 
-          <div className="app__testimonial-btns app__flex">
-            <div className="app__flex" onClick={() => handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1)}>
-              <HiChevronLeft />
-            </div>
-
-            <div className="app__flex" onClick={() => handleClick(currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1)}>
-              <HiChevronRight />
-            </div>
+          <div className="app__flex" onClick={handleNext}>
+            <HiChevronRight />
           </div>
-        </>
+        </div>
       )}
 
       <div className="app__testimonial-brands app__flex">

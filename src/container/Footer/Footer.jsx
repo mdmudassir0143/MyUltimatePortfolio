@@ -45,7 +45,6 @@ const Footer = () => {
 
   return (
     <>
-      <span className="app__footer-tag">👋 Get in touch</span>
       <h2 className="head-text">Let&apos;s build something <span>together</span></h2>
       <p className="p-text app__footer-subtitle">
         A collaboration, a speaking invite, or you just want to talk DevRel, AI,
